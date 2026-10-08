@@ -1,0 +1,294 @@
+@charset "UTF-8";
+
+/* ===================================================
+   기본 스타일 및 변수 설정
+   =================================================== */
+:root {
+  --bg-color: #faf6f0;           /* 따뜻한 베이지 배경 */
+  --card-bg: #ffffff;            /* 카드 컨테이너 흰색 배경 */
+  --primary-color: #6b4226;       /* 시그니처 브라운 */
+  --primary-hover: #825232;       /* 버튼 호버 시 밝은 브라운 */
+  --primary-light: rgba(107, 66, 38, 0.15); /* 포커스용 연한 브라운 섀도우 */
+  --border-color: #e0d7cd;        /* 부드러운 테두리 색상 */
+  --text-main: #333333;           /* 본문 텍스트 색상 */
+  --text-muted: #7d7065;          /* 부제 및 보조 텍스트 색상 */
+  --success-bg: #eaf7ec;          /* 주문 완료 안내 연두색 배경 */
+  --success-text: #206a2e;        /* 주문 완료 안내 초록 텍스트 */
+  --success-border: #bce6c3;      /* 주문 완료 안내 테두리 */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: '맑은 고딕', 'Malgun Gothic', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  padding: 40px 16px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===================================================
+   공통 레이아웃 (최대 너비 520px, 카드 스타일)
+   =================================================== */
+header,
+main {
+  width: 100%;
+  max-width: 520px;
+}
+
+/* ===================================================
+   [페이지 상단] 카페 헤더
+   =================================================== */
+header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+header .logo {
+  font-size: 56px;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+header h1 {
+  font-size: 28px;
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+header p {
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+/* ===================================================
+   [메인 폼 카드]
+   =================================================== */
+form#orderForm {
+  background: var(--card-bg);
+  padding: 28px 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(107, 66, 38, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 개별 입력 항목 그룹 */
+form#orderForm > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 항목 레이블 스타일 */
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* ===================================================
+   입력창 공통 스타일 (text, tel, number, select, textarea)
+   =================================================== */
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 15px;
+  font-family: inherit;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: #fff;
+  color: var(--text-main);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+/* 포커스 시 갈색 테두리 및 연한 갈색 그림자 */
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+/* 텍스트에어리어 리사이즈 설정 */
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ===================================================
+   사이즈 & 추가 옵션 필드셋 (라디오, 체크박스 가로 배치)
+   =================================================== */
+fieldset {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: center;
+}
+
+legend {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-color);
+  padding: 0 6px;
+}
+
+/* 라디오 / 체크박스 아이템 wrapper */
+fieldset > div {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+/* 라디오 & 체크박스 입력요소 */
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: var(--primary-color);
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+fieldset label {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+/* ===================================================
+   예상 금액 표시 영역
+   =================================================== */
+#estimatedPriceArea {
+  margin-top: 6px;
+  padding: 14px;
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* ===================================================
+   버튼 그룹 스타일
+   =================================================== */
+form#orderForm > div:last-child {
+  flex-direction: row;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+button {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+/* 주문하기 버튼 (기본 브라운 배경) */
+#submitBtn {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: 1px solid var(--primary-color);
+}
+
+#submitBtn:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+/* 다시 작성 버튼 (흰 배경 + 갈색 테두리) */
+#resetBtn {
+  background-color: #ffffff;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+#resetBtn:hover {
+  background-color: #f7efe7;
+}
+
+/* ===================================================
+   주문 확인 메시지 영역
+   =================================================== */
+#orderConfirmation {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background-color: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  box-shadow: 0 4px 12px rgba(32, 106, 46, 0.08);
+}
+
+/* ===================================================
+   hidden 클래스 및 속성 숨김 처리
+   =================================================== */
+.hidden,
+[hidden] {
+  display: none !important;
+}
+
+/* ===================================================
+   모바일 반응형 스타일 미세조정
+   =================================================== */
+@media (max-width: 480px) {
+  body {
+    padding: 24px 12px;
+  }
+
+  form#orderForm {
+    padding: 20px 16px;
+  }
+
+  header .logo {
+    font-size: 48px;
+  }
+
+  header h1 {
+    font-size: 24px;
+  }
+
+  #estimatedPriceArea {
+    font-size: 20px;
+    padding: 12px;
+  }
+
+  fieldset {
+    gap: 10px 12px;
+  }
+}
+
